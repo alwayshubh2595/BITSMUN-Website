@@ -1,0 +1,25 @@
+.toggle {
+    /* `currentColor` lets the button inherit the header's white-on-hero or
+       ink-on-page colour without needing a variant per placement. */
+    color: currentColor;
+    background: transparent;
+    border: 1px solid currentColor;
+    border-radius: 2px;
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    cursor: pointer;
+    opacity: 0.75;
+    transition: opacity var(--transition), color var(--transition),
+        border-color var(--transition), transform var(--transition);
+
+    &:hover {
+        opacity: 1;
+        color: var(--brand-accent);
+        border-color: var(--brand-accent);
+        transform: translateY(-1px);
+    }
+}

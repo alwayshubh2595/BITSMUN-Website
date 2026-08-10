@@ -1,0 +1,489 @@
+.delform {
+    // border: 2px solid black;
+    width: 90%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: start;
+
+    .error {
+        border: 2px solid red;
+
+    }
+
+    .inputField {
+        width: 90%;
+        margin: 10px;
+
+        input, select, datalist {
+            color: var(--text-on-light);
+            font-size: 1rem;
+            font-family: var(--font-sans);
+            font-weight: 300;
+            border-radius: var(--radius-sm);
+            width: 100%;
+            padding: 5px;
+            margin-top: 5px;
+        }
+
+        input::placeholder {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        datalist option {
+            font-size: 1rem;
+            font-family: var(--font-sans);
+            font-weight: 300;
+        }
+    }
+
+    .strikeThrough {
+        text-decoration: line-through;
+        color: var(--danger);
+    }
+
+    .checkButton {
+
+        background-color: var(--surface-raised);
+        transition: 0.2s ease;
+        font-family: var(--font-sans);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+        height: 30px;
+
+        &:hover {
+            background-color: rgb(76, 76, 76);
+            color: var(--text-on-dark);
+            cursor: pointer;
+        }
+
+    }
+
+    .loading {
+        cursor: not-allowed;
+        position: relative;
+    }
+
+    .loading::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 20px;
+        height: 20px;
+        border: 2px solid transparent;
+        border-top-color: var(--color-white);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        transform: translate(-50%, -50%);
+    }
+
+    @keyframes spin {
+        0% {
+            transform: translate(-50%, -50%) rotate(0deg);
+        }
+        100% {
+            transform: translate(-50%, -50%) rotate(360deg);
+        }
+    }
+
+    .errorPara {
+        font-family: var(--font-sans);
+        color: var(--danger);
+    }
+
+    label {
+        font-weight: 500;
+        font-family: var(--font-sans);
+    }
+
+    input {
+        color: var(--text-on-light);
+        font-size: 1rem;
+        font-family: var(--font-sans);
+        font-weight: 300;
+        border-radius: var(--radius-sm);
+
+    }
+
+    .submitted {
+        color: var(--success);
+        font-family: var(--font-sans);
+        font-weight: bold;
+        font-size: 0.9rem;
+        transition: 0.3s ease-in-out;
+        margin-bottom: 10px;
+    }
+
+    .submitte {
+        color: var(--danger);
+        font-family: var(--font-sans);
+        font-weight: bold;
+        font-size: 0.9rem;
+        transition: 0.3s ease-in-out;
+        margin-bottom: 10px;
+    }
+
+    .submitFailed {
+        display: flex;
+        align-items: flex-start;
+        text-align: left;
+        color: var(--danger);
+        font-family: var(--font-sans);
+        font-weight: bold;
+        font-size: 0.9rem;
+        line-height: 1.4;
+        border: 1px solid var(--danger);
+        border-radius: 4px;
+        padding: 10px 12px;
+        margin-bottom: 10px;
+    }
+
+    select {
+        color: var(--text-on-light);
+        font-family: var(--font-sans);
+        font-weight: 300;
+        border-radius: var(--radius-sm);
+    }
+
+    .submitButton {
+        height: 2.5rem;
+        background-color: var(--surface-raised);
+        border: 2px solid black;
+        transition: 0.2s ease;
+        font-family: var(--font-sans);
+        margin-bottom: 15px;
+
+        &:hover {
+            background-color: var(--surface-dark);
+            color: var(--text-on-dark);
+            cursor: pointer;
+        }
+
+        &:disabled {
+            background-color: var(--text-muted);
+            color: var(--text-on-dark);
+            cursor: not-allowed;
+        }
+    }
+
+    .accountDetails {
+        width: 90%;
+        margin: 20px 0;
+        padding: 10px;
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-sm);
+        background-color: var(--surface-light);
+
+        h3 {
+            font-family: var(--font-sans);
+            font-weight: bold;
+            color: var(--text-on-light);
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            color: var(--text-on-light);
+            margin: 5px 0;
+
+            strong {
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+.qr {
+    .qrTitle {
+        font-family: var(--font-sans);
+        font-weight: bold;
+        color: var(--text-on-light);
+
+    }
+
+    .qrimg {
+        object-fit: contain;
+
+        img {
+            height: 100%;
+            width: 100%;
+        }
+    }
+}
+
+@media screen and (max-width: 768000px) {
+    .submitButton {
+        width: 10vw;
+    }
+    .regfee{
+        font-size: 1rem;
+        font-family: var(--font-sans);
+    }
+    .checkButton {
+        width: 200px;
+    }
+
+    .qrTitle {
+        font-size: 1rem;
+    }
+
+    .qrimg {
+        height: 60vh;
+    }
+
+    label {
+        font-size: 1rem;
+    }
+
+    input {
+        height: 2.5rem;        
+        padding: 3px;
+    }
+
+    input::placeholder {
+        color: var(--text-muted);
+        font-size: 1rem;
+    }
+
+    select {
+        height: 2.5rem;
+        font-size: 1rem;        
+        padding: 3px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .submitButton {
+        width: 20vw;
+    }
+
+    .delform {
+        .accountDetails {
+            p {
+                font-size: 0.9rem;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .checkButton {
+        width: 100px;
+    }
+    .regfee{
+        font-size: 0.8rem;
+        font-family: var(--font-sans);
+    }
+    .submitButton {
+        width: 20vw;
+        font-size: 0.8rem;
+    }
+
+    label {
+        font-size: 0.8rem;
+    }
+
+    input {
+        height: 1.5rem;        
+        padding: 2px;
+    }
+
+    input::placeholder {
+        color: var(--text-muted);
+        font-size: 0.7rem;
+    }
+
+    select {
+        height: 1.5rem;
+        font-size: 0.6rem;        
+        padding: 2px;
+    }
+
+    .qrTitle {
+        font-size: 0.8rem;
+    }
+
+    .qrimg {
+        height: 40vh;
+    }
+
+    .delform {
+        .accountDetails {
+            p {
+                font-size: 0.8rem;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .qrimg {
+        height: 30vh;
+
+    }
+
+    .delform {
+        .accountDetails {
+            p {
+                font-size: 0.7rem;
+            }
+        }
+    }
+}
+/* ------------------------------------------------------------------
+   Form controls.
+
+   Inputs and selects previously declared no background or colour, so
+   they fell back to the browser default of white-on-black. In dark mode
+   that gave stark white boxes, and `select` was worse — it set a light
+   text colour on that default white ground, rendering the choice
+   invisible. Everything below is token-driven so both themes work.
+
+   Widths are uniform (100% of the field) so the column has a single
+   left and right edge instead of 80%/60%/90% per control.
+   ------------------------------------------------------------------ */
+
+.delform {
+    /* Constrain and centre the form; it previously ran the full width. */
+    width: min(680px, 92%);
+    margin-inline: auto;
+    align-items: stretch;
+    gap: var(--space-4);
+
+    .inputField {
+        width: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2);
+    }
+
+    label {
+        font-family: var(--font-mono);
+        font-size: var(--step--1);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-muted);
+    }
+
+    input,
+    select,
+    textarea {
+        width: 100%;
+        height: auto;
+        min-height: 44px;
+        padding: var(--space-3);
+        font-family: var(--font-sans);
+        font-size: var(--step-0);
+        color: var(--text-on-light);
+        background-color: var(--surface-raised);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-sm);
+        transition: border-color var(--transition), box-shadow var(--transition);
+
+        &:focus {
+            outline: none;
+            border-color: var(--brand-accent);
+            box-shadow: 0 0 0 3px rgba(114, 128, 255, 0.25);
+        }
+    }
+
+    /* Native dropdown lists are painted by the OS; without this the options
+       inherit the page colours and can end up unreadable. */
+    select option {
+        background-color: var(--surface-raised);
+        color: var(--text-on-light);
+    }
+
+    input[type="file"] {
+        padding: var(--space-2);
+        color: var(--text-muted);
+        cursor: pointer;
+
+        &::file-selector-button {
+            font-family: var(--font-mono);
+            font-size: var(--step--1);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-right: var(--space-3);
+            padding: var(--space-2) var(--space-4);
+            border: 1px solid var(--border-strong);
+            border-radius: 2px;
+            background-color: transparent;
+            color: var(--text-on-light);
+            cursor: pointer;
+        }
+    }
+
+    .error {
+        border: 1px solid var(--danger);
+    }
+
+    .couponRow {
+        display: flex;
+        gap: var(--space-3);
+        align-items: stretch;
+    }
+
+    .coupon {
+        /* Sits beside its Check button rather than filling the row. */
+        width: auto;
+        flex: 1 1 auto;
+    }
+
+    .checkButton {
+        font-family: var(--font-mono);
+        font-size: var(--step--1);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        height: 44px;
+        margin-top: 0;
+        padding: 0 var(--space-5);
+        border: 1px solid var(--border-strong);
+        border-radius: 2px;
+        color: var(--text-on-light);
+        background-color: transparent;
+
+        &:hover {
+            background-color: var(--brand-accent);
+            color: var(--text-on-accent);
+            border-color: var(--brand-accent);
+        }
+    }
+
+    .submitButton {
+        width: 100%;
+        height: 48px;
+        font-family: var(--font-mono);
+        font-size: var(--step--1);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        border: none;
+        border-radius: 2px;
+        background-color: var(--brand-accent);
+        color: var(--text-on-accent);
+
+        &:hover {
+            background-color: var(--color-white);
+            color: var(--color-ink);
+        }
+
+        &:disabled {
+            background-color: var(--border-strong);
+            color: var(--text-muted);
+            cursor: not-allowed;
+        }
+    }
+
+    .regfee,
+    .qr .qrTitle {
+        color: var(--text-on-light);
+    }
+}

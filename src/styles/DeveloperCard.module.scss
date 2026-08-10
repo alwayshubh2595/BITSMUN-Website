@@ -1,0 +1,72 @@
+/* Same fix as the team card: the photo frame was a percentage of a vh/vw-sized
+   card, so its aspect ratio shifted with the window and at each of seven
+   breakpoints. Locked to 4:5, matching the CDN transform the page requests. */
+
+.DeveloperCard {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-subtle);
+    background-color: var(--surface-raised);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: box-shadow var(--transition), transform var(--transition);
+
+    &:hover {
+        box-shadow: var(--shadow-md);
+        transform: translateY(-2px);
+    }
+
+    .DeveloperImage {
+        width: 100%;
+        aspect-ratio: 4 / 5;
+        flex-shrink: 0;
+        background-color: var(--surface-dark);
+
+        img {
+            display: block;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            object-position: center 25%;
+        }
+    }
+
+    .DeveloperDetails {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-3);
+        padding: var(--space-4);
+        text-align: center;
+
+        .DeveloperName {
+            font-family: var(--font-sans);
+            font-size: var(--step-0);
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--brand);
+            line-height: 1.25;
+            overflow-wrap: anywhere;
+        }
+
+        .DevSocialMedia {
+            display: flex;
+            gap: var(--space-4);
+            align-items: center;
+            font-size: var(--step-1);
+
+            a {
+                color: var(--text-muted);
+                text-decoration: none;
+                transition: color var(--transition);
+
+                &:hover {
+                    color: var(--brand-accent);
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

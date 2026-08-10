@@ -1,0 +1,99 @@
+.prizePool {
+    width: 100%;
+    padding: var(--space-8) var(--space-4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: var(--font-sans);
+}
+
+.heading {
+    font-family: var(--font-display);
+    font-size: var(--step-4);
+    font-weight: bold;
+    color: var(--brand);
+    text-align: center;
+    letter-spacing: 0.02em;
+}
+
+.total {
+    font-size: var(--step-1);
+    color: var(--brand-accent);
+    font-weight: 600;
+    text-align: center;
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-6);
+}
+
+.grid {
+    width: min(1100px, 100%);
+    display: grid;
+    /* Collapses 3 -> 2 -> 1 without needing breakpoints. */
+    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+    gap: var(--space-5);
+}
+
+.card {
+    background-color: var(--surface-raised);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-5);
+    transition: box-shadow var(--transition), transform var(--transition);
+
+    &:hover {
+        box-shadow: var(--shadow-md);
+        transform: translateY(-2px);
+    }
+}
+
+.cardLabel {
+    font-size: var(--step--1);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--brand-accent);
+    padding-bottom: var(--space-3);
+    margin-bottom: var(--space-3);
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.awards {
+    list-style: none;
+
+    li {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: var(--space-3);
+        padding: var(--space-2) 0;
+    }
+}
+
+.awardName {
+    font-size: var(--step-0);
+    color: var(--text-muted);
+}
+
+.awardAmount {
+    font-size: var(--step-1);
+    font-weight: 700;
+    color: var(--brand);
+    white-space: nowrap;
+}
+
+.index {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    color: var(--brand-accent);
+    font-size: 0.62em;
+    letter-spacing: 0.08em;
+    vertical-align: 0.32em;
+    margin-right: 0.35em;
+}
+
+.awardAmount,
+.total {
+    font-family: var(--font-mono);
+    letter-spacing: -0.01em;
+}

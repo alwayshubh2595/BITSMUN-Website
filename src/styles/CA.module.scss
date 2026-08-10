@@ -1,0 +1,236 @@
+/* The page was four full-width blocks stacked in a single column, which made a
+   short page feel long and hid the fact that the three tiers are comparable.
+   They now sit side by side so the progression reads at a glance. */
+
+.mainpage {
+  width: min(1160px, 100% - 2 * var(--space-5));
+  margin: 0 auto;
+  padding: var(--space-6) 0 var(--space-8);
+  font-family: var(--font-sans);
+}
+
+.pageHead {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto var(--space-7);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--brand-accent);
+  margin-bottom: var(--space-3);
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: var(--step-4);
+  font-weight: 700;
+  color: var(--brand);
+  line-height: 1.1;
+}
+
+.lede {
+  font-size: var(--step-0);
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin-top: var(--space-3);
+}
+
+/* --- tiers ------------------------------------------------------------ */
+
+.tiers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap: var(--space-5);
+  align-items: stretch;
+  margin-bottom: var(--space-6);
+}
+
+.tier {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding: var(--space-5);
+  background-color: var(--surface-raised);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition), transform var(--transition);
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+}
+
+.tierHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.tierIndex {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--brand-accent);
+}
+
+.tierRange {
+  font-family: var(--font-display);
+  font-size: var(--step-3);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--brand);
+}
+
+.tierUnit {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-muted);
+}
+
+.benefit {
+  h2 {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-2);
+  }
+
+  ul {
+    list-style: none;
+
+    li {
+      position: relative;
+      padding-left: var(--space-4);
+      font-size: var(--step-0);
+      line-height: 1.5;
+      color: var(--text-on-light);
+
+      + li {
+        margin-top: var(--space-2);
+      }
+
+      /* Accent rule instead of a default disc. */
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.6em;
+        width: 8px;
+        height: 1px;
+        background-color: var(--brand-accent);
+      }
+    }
+  }
+}
+
+/* --- top performers --------------------------------------------------- */
+
+.highlight {
+  padding: var(--space-6);
+  border-radius: var(--radius-md);
+  background-color: var(--surface-dark);
+  color: var(--text-on-dark);
+  text-align: center;
+  margin-bottom: var(--space-6);
+
+  h2 {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    font-weight: 700;
+    color: var(--color-white);
+    margin-bottom: var(--space-2);
+  }
+
+  p {
+    font-size: var(--step-0);
+    line-height: 1.6;
+    color: var(--text-muted-on-dark);
+    max-width: 620px;
+    margin: 0 auto;
+  }
+}
+
+/* --- contacts --------------------------------------------------------- */
+
+.contactSection {
+  padding: var(--space-6);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background-color: var(--surface-raised);
+  text-align: center;
+
+  h2 {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    font-weight: 700;
+    color: var(--brand);
+  }
+}
+
+.contactIntro {
+  font-size: var(--step-0);
+  color: var(--text-muted);
+  margin: var(--space-2) 0 var(--space-5);
+}
+
+.contactGrid {
+  display: grid;
+  /* Two contacts side by side, stacking on narrow screens. */
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+  gap: var(--space-4);
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.contactCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-4);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+}
+
+.contactName {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  font-weight: 700;
+  color: var(--brand);
+  margin-bottom: var(--space-1);
+}
+
+.contactLink {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--text-muted);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: color var(--transition);
+
+  &:hover {
+    color: var(--brand-accent);
+  }
+}
+
+.terms {
+  text-align: center;
+  font-size: var(--step--1);
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin-top: var(--space-6);
+  max-width: 640px;
+  margin-inline: auto;
+}

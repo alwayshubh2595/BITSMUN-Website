@@ -1,0 +1,60 @@
+.BGWrapper{
+    width: 100vw;
+    height: 110vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .title{
+        font-family: var(--font-display);
+        width: 100vw;
+        height: 10vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: var(--font-sans);
+        font-size: var(--step-4);
+        font-weight: bold;
+        color: var(--brand);
+        text-align: center;
+
+    }
+    .subTitle{
+        width: 100vw;
+        height: 10vh;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        font-family: var(--font-sans);
+        font-size: 1rem;
+        font-weight: 400;
+        color: var(--brand);
+        text-align: center;
+        padding-left: 5vw; /* Add padding for left alignment */
+
+
+    }
+    .content{
+        width: 100vw;
+        height: 70vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start; /* Align items to the top */
+        align-items: flex-start; /* Align items to the left */
+        padding-left: 5vw; /* Add padding for left alignment */
+        
+        a{
+            text-decoration: none;
+            height: 10vh;
+            color: var(--text-on-light);
+            font-family: var(--font-sans);
+            font-size: 1.3rem;
+            font-weight: 600;
+            transition: 0.2s ease-in-out;
+            text-align: center;
+            &:hover{
+                color: rgb(114, 114, 114);
+                cursor: pointer;
+            }
+        }
+    }
+}

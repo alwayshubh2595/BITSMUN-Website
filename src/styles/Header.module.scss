@@ -1,0 +1,251 @@
+.Header {
+  width: 100%;
+  height: 20vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-sans);
+
+  .logo {
+    height: 100%;
+    width: 20%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 1rem;
+
+    // The 2026 mark is square, unlike the wide 2025 wordmark it replaced, so it
+    // is sized off the header height and left to keep its own aspect ratio.
+    img {
+      width: auto;
+      max-width: 100%;
+      height: 78%;
+      object-fit: contain;
+    }
+  }
+
+  .navbar {
+    height: 100%;
+    width:55%;
+    margin-right: 3%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    div {
+      transition: 0.2s ease;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+.hamburgerIcon {
+  margin-right: 5%;
+  display: none;
+  background-color: transparent;
+  border: none;
+  font-size: 1.4rem;
+  color: var(--brand);
+}
+.hamburgerMenu {
+  overflow: hidden;
+    position: absolute;
+    height: 100vh;
+    right: 0;
+    top: 0;
+    background-color: var(--surface-raised);
+    transition: 0.7s ease;
+    .hamburgerHeader{
+        height: 20%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .hamburgerHeaderLogo{
+            margin-left: 8%;
+            width: 20%;
+            height: 100%;
+            img{
+                height: 100%;
+                width: 100%;
+                object-fit: contain;
+            }
+
+        }
+        .closeIcon{
+            margin-right: 8%;
+            background-color: transparent;
+            border: none;
+            color: var(--brand);
+            font-size: 1.4rem;
+            &:hover{
+                cursor: pointer;
+            }
+        }
+    }
+    .hamburgerNavbar{
+        height: 60%;
+        touch-action: none;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        div{
+            transition: 0.2s ease;
+            &:hover{
+                cursor: pointer;
+                color: rgba(0, 0, 0, 0.578);
+            }
+        }
+    }
+}
+.link{
+    text-decoration: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdownContent {
+  display: none;
+  position: absolute;
+  /* Was absolutely positioned with no anchor, so it fell at its static
+     position and left a dead gap under the trigger — crossing that gap fired
+     mouseleave and closed the menu before it could be clicked. */
+  top: 100%;
+  left: 0;
+  background-color: var(--surface-raised);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  min-width: 200px;
+  box-shadow: var(--shadow-md);
+  z-index: 20;
+  overflow: hidden;
+
+  /* Invisible bridge so the pointer never leaves .dropdown on its way down. */
+  &::before {
+    content: "";
+    position: absolute;
+    top: -14px;
+    left: 0;
+    right: 0;
+    height: 14px;
+  }
+}
+
+.dropdown:hover .dropdownContent {
+  display: block;
+}
+
+.dropdown .fa-caret-down, .dropdown .fa-caret-up {
+  margin-left: 5px;
+  transition: transform 0.3s ease;
+}
+
+.rotate {
+  transition: transform 0.3s ease;
+  transform: rotate(180deg);
+}
+.norotate{
+    transition: transform 0.3s ease;
+    transform: rotate(0deg);
+}
+
+.dropdownContent a {
+  color: var(--text-on-light);
+  font-family: var(--font-sans);
+  font-size: var(--step--1);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  white-space: nowrap;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+.dropdownContent a:hover {
+  background-color: var(--brand-accent);
+  color: var(--text-on-accent);
+}
+
+@media screen and (max-width: 1600px) {
+  .hamburgerMenu{
+    display: none;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .Header {
+    height: 15vh;
+    .logo {
+      width: 30%;
+      img {
+        height: 100%;
+      }
+    }
+    .navbar {
+      width: 60%;
+    }
+  }
+}
+@media screen and (max-width: 900px) {
+  .Header {
+    height: 15vh;
+    .logo {
+      width: 30%;
+      img {
+        height: 100%;
+      }
+    }
+    .navbar {
+      width: 65%;
+      font-size: 0.8rem;
+    }
+  }
+}
+@media screen and (max-width: 700px) {
+  .Header {
+    height: 15vh;
+    .logo {
+      width: 30%;
+      img {
+        height: 100%;
+      }
+    }
+    .navbar {
+      width: 65%;
+      font-size: 0.6rem;
+    }
+  }
+}
+@media screen and (max-width: 600px) {
+  .Header {
+    height: 15vh;
+    .logo {
+      width: 30%;
+      img {
+        height: 100%;
+      }
+    }
+    .navbar {
+      display: none;
+    }
+    .hamburgerMenu{
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hamburgerIcon {
+      display: block;
+    }
+  }
+}
+
+.hamburgerActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-on-light);
+}

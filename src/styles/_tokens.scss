@@ -1,0 +1,125 @@
+/* Design tokens for SOD x BITSMUN 2026.
+ *
+ * The palette is sampled directly from the 2026 brochure PDF rather than picked
+ * by eye, so the site and the printed collateral match:
+ *   0A0B12  page background / ink
+ *   7280FF  periwinkle, the dominant accent
+ *   107CDB  the brighter blue used in cover artwork
+ *   FCF6EF  cream, used for large light areas
+ *
+ * This replaces the previous ad-hoc palette, which was built around a dark teal
+ * that appears nowhere in the 2026 brand.
+ */
+
+:root {
+  /* Raw palette */
+  --color-ink: #0a0b12;
+  --color-ink-soft: #1b1e33;
+  --color-cream: #fcf6ef;
+  /* The brochure's cream is warm, which is fine on a printed page but reads
+     distinctly yellow when it fills a whole browser window. Large light areas
+     use this cool near-white instead; cream is kept for small accents. */
+  --color-paper: #f6f8fb;
+  --color-accent: #7280ff;
+  --color-accent-strong: #107cdb;
+  --color-white: #ffffff;
+
+  /* Ink used for text that sits ON the periwinkle accent. Constant across both
+     themes: the accent does not change, so its required foreground does not
+     either. Cream on periwinkle is 3.1:1 and fails AA; ink is 5.7:1. */
+  --text-on-accent: #0a0b12;
+
+  /* ------------------------------------------------------------------
+     DARK THEME — the default.
+     `--surface-light` names the page ground and `--surface-dark` the
+     inverted band; the names describe their ROLE, not their lightness,
+     so both themes redefine the same tokens and no component changes.
+     ------------------------------------------------------------------ */
+  --surface-light: #0e1018;
+  --surface-dark: #07080f;
+  --surface-raised: #161a26;
+
+  --brand: #e9ecf4;
+  --brand-accent: var(--color-accent);
+  --text-on-dark: #e9ecf4;
+  --text-on-light: #e9ecf4;
+  --text-muted: rgba(233, 236, 244, 0.62);
+  --text-muted-on-dark: rgba(233, 236, 244, 0.62);
+
+  --border-subtle: rgba(233, 236, 244, 0.12);
+  --border-strong: rgba(233, 236, 244, 0.28);
+
+  --danger: #ff6f61;
+  --success: #4ade80;
+
+  /* Typography. Poppins is loaded in global.scss; the fallback stack matters
+     because the webfont may fail or be slow on poor networks. */
+  --font-sans: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  /* Monospace carries the technical register: figures, micro-labels, section
+     indices. Pairs with the brochure's data-motif artwork. */
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* Display face for the wordmark and headings. Space Grotesk is a technical
+     grotesque that pairs with JetBrains Mono, and is SIL Open Font Licensed —
+     unlike the "Compressa VF" demo font the hero used to pull from a CDN. */
+  --font-display: "Space Grotesk", "Poppins", system-ui, sans-serif;
+
+  /* Fluid type scale, ~1.2 ratio at small sizes widening to ~1.33 at large.
+     Font sizes should come from here rather than a magic rem value. */
+  --step--1: clamp(0.83rem, 0.8rem + 0.15vw, 0.94rem);
+  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.13rem);
+  --step-1: clamp(1.2rem, 1.13rem + 0.35vw, 1.5rem);
+  --step-2: clamp(1.44rem, 1.32rem + 0.6vw, 2rem);
+  --step-3: clamp(1.73rem, 1.53rem + 1vw, 2.66rem);
+  --step-4: clamp(2.07rem, 1.76rem + 1.6vw, 3.55rem);
+  --step-5: clamp(2.49rem, 2rem + 2.4vw, 4.74rem);
+
+  /* Spacing, 4px base */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 18px;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.45), 0 12px 32px rgba(0, 0, 0, 0.4);
+
+  --transition: 0.25s ease;
+
+  /* Halftone dot screen, echoing the brochure's treatment of its photography. */
+  --dot-grid: radial-gradient(rgba(114, 128, 255, 0.28) 1px, transparent 1px);
+  --dot-grid-size: 22px 22px;
+}
+
+/* ------------------------------------------------------------------
+   LIGHT THEME — opt-in, applied by the toggle via data-theme="light"
+   on <html>. Only the tokens whose values differ are redeclared.
+   ------------------------------------------------------------------ */
+:root[data-theme="light"] {
+  --surface-light: var(--color-paper);
+  /* The inverted band stays dark in light mode — that is the point of it. */
+  --surface-dark: var(--color-ink);
+  --surface-raised: var(--color-white);
+
+  --brand: var(--color-ink);
+  --text-on-light: var(--color-ink);
+  /* Unchanged in spirit: still the foreground for the dark band. */
+  --text-on-dark: var(--color-cream);
+  --text-muted: rgba(10, 11, 18, 0.62);
+  --text-muted-on-dark: rgba(252, 246, 239, 0.68);
+
+  --border-subtle: rgba(10, 11, 18, 0.14);
+  --border-strong: rgba(10, 11, 18, 0.3);
+
+  --shadow-sm: 0 1px 2px rgba(10, 11, 18, 0.06), 0 2px 8px rgba(10, 11, 18, 0.06);
+  --shadow-md: 0 4px 12px rgba(10, 11, 18, 0.1), 0 12px 32px rgba(10, 11, 18, 0.1);
+
+  --danger: #c0392b;
+  --success: #1d7a4c;
+}

@@ -1,0 +1,87 @@
+/* The card used to be sized 50vh x 20vw with the photo set to 70%/90% of that,
+   so the image frame was 18vw x 35vh — an aspect ratio that changed with the
+   window's shape and jumped at each of eight breakpoints. Every portrait was
+   therefore cropped differently depending on the viewport.
+
+   The frame is now a locked 4:5, matching the Sanity CDN transform the page
+   requests, so a photo is cropped identically everywhere. The card height is
+   content-driven and the grid equalises rows. */
+
+.AboutUsCard {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-subtle);
+    background-color: var(--surface-raised);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: box-shadow var(--transition), transform var(--transition);
+
+    &:hover {
+        box-shadow: var(--shadow-md);
+        transform: translateY(-2px);
+    }
+
+    .Image {
+        width: 100%;
+        aspect-ratio: 4 / 5;
+        flex-shrink: 0;
+        background-color: var(--surface-dark);
+
+        img {
+            display: block;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            /* Bias toward the upper third so faces stay in frame. */
+            object-position: center 25%;
+        }
+    }
+
+    .Details {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-2);
+        padding: var(--space-4);
+        text-align: center;
+    }
+
+    .Name {
+        color: var(--brand);
+        font-family: var(--font-sans);
+        font-size: var(--step-0);
+        text-transform: uppercase;
+        font-weight: 700;
+        line-height: 1.25;
+        overflow-wrap: anywhere;
+    }
+
+    .post {
+        font-family: var(--font-sans);
+        font-size: var(--step--1);
+        font-weight: 600;
+        color: var(--brand-accent);
+        line-height: 1.35;
+    }
+
+    .SocialMedia {
+        display: flex;
+        gap: var(--space-4);
+        align-items: center;
+        margin-top: var(--space-1);
+        font-size: var(--step-0);
+
+        a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color var(--transition);
+
+            &:hover {
+                color: var(--brand-accent);
+                cursor: pointer;
+            }
+        }
+    }
+}

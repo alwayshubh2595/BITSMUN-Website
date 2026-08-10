@@ -1,0 +1,487 @@
+.homeContainer{
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    background-color: var(--surface-dark);
+}
+.PageLoader{
+    background-color: var(--surface-dark);
+    z-index: 100;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* Intro. The old loader typed the title out character by character behind a
+   sliding bar; this one is a single centred lockup — mark, wordmark, meter —
+   that lifts away as a curtain. The panel always paints an opaque ground: it
+   sits above the hero, which is already laid out beneath it. */
+.loaderPanel {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--surface-dark);
+    /* Same halftone as the hero, so the intro and the page share a surface. */
+    background-image: var(--dot-grid);
+    background-size: var(--dot-grid-size);
+    will-change: transform;
+}
+
+.loaderContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    width: min(420px, 74vw);
+    user-select: none;
+}
+
+.loaderMark {
+    width: clamp(84px, 14vw, 132px);
+    height: auto;
+    /* A slow breath rather than a spinner: it reads as composed, and it is one
+       composited property. */
+    animation: loaderMarkIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes loaderMarkIn {
+    from { opacity: 0; transform: scale(0.88); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+.loaderWord {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.34em;
+    /* The tracking adds a trailing gap that visually shifts the word left. */
+    text-indent: 0.34em;
+    text-transform: uppercase;
+    color: var(--text-on-dark);
+    white-space: nowrap;
+}
+
+.loaderMeter {
+    width: 100%;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.16);
+    overflow: hidden;
+}
+
+.loaderMeterFill {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: var(--brand-accent);
+    transform-origin: left center;
+    transform: scaleX(0);
+}
+
+.loaderMeta {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-on-dark);
+    opacity: 0.6;
+}
+
+.loaderCount {
+    font-variant-numeric: tabular-nums;
+    color: var(--brand-accent);
+    opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .loaderMark { animation: none; }
+}
+.Home {
+    /* Laid out at full width from the first frame and simply covered by the
+       loader panel, so the hero never animates its own width. */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    /* Background now comes from HeroSlideshow, which supplies its own scrim. */
+    background-color: var(--color-ink);
+    z-index: 4;
+    overflow: hidden;
+  }
+.mainSection {
+  color: var(--text-on-dark);
+  height: 80%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* --------------------------------------------------------------
+     Hero lockup.
+
+     The partner credit and the wordmark previously sat about 1:13
+     apart, which read as two unrelated elements. They now share one
+     type ramp at roughly 1:2.5 — clearly hierarchical, but composed.
+     Both use the display face and the same optical left edge.
+     -------------------------------------------------------------- */
+  .lockup {
+    display: flex;
+    flex-direction: column;
+    /* Centred to match the meta row and actions beneath it. */
+    align-items: center;
+    text-align: center;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    margin-bottom: var(--space-6);
+  }
+
+  .partner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Secondary, but substantial — roughly 40% of the wordmark. */
+    font-size: clamp(1.6rem, 5vw, 3.6rem);
+    font-weight: 600;
+    line-height: 0.94;
+    letter-spacing: 0.01em;
+    color: var(--color-white);
+    text-decoration: none;
+    transition: color var(--transition);
+
+    &:hover .partnerX {
+      color: var(--color-white);
+    }
+
+    &:hover .partnerWord {
+      color: var(--brand-accent);
+    }
+  }
+
+  .partnerWord,
+  .partnerX {
+    display: block;
+    transition: color var(--transition);
+  }
+
+  /* The X carries the accent, so the collaboration reads as a mark. */
+  .partnerX {
+    color: var(--brand-accent);
+  }
+
+  .wordmark {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Sits tight under the partner block so the two read as one unit. */
+    margin-top: var(--space-2);
+    font-weight: 700;
+    line-height: 0.86;
+    letter-spacing: -0.025em;
+  }
+
+  .wordmarkName {
+    font-size: clamp(3rem, 12vw, 9rem);
+    color: var(--color-white);
+  }
+
+  .wordmarkYear {
+    font-size: clamp(3rem, 12vw, 9rem);
+    color: var(--brand-accent);
+  }
+
+  .mainSectionDetails {
+    width: 100%;
+    font-family: var(--font-sans);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-6);
+    margin-top: var(--space-4);
+  }
+}
+.section2{
+    width: 100vw;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    .section2Heading{
+        width: 100%;
+        height: 15%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: var(--font-sans);
+        color: var(--brand);
+        font-size: 1.8rem;
+        font-weight: bold;
+    }
+    .section2Text{
+        width: 90%;
+        height: 80%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: var(--font-sans);
+        color: var(--text-on-light);
+        font-size: 0.85rem;
+        overflow: hidden;
+    }
+}
+.skipText {
+    font-family: var(--font-sans);
+
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+  font-size: 0.6rem;
+  color: var(--text-on-dark);
+  opacity: 0.5;
+}
+@media screen and (max-width:800px){
+    .mainSection{
+    }
+    .section2{
+        .section2Heading{
+            font-size: 1.4rem;
+        }
+        .section2Text{
+            font-size: 0.75rem;
+        }
+    
+    }
+}
+@media screen and (max-width:610px){
+    .mainSection{
+    }
+    .Home{
+        background-position: center
+    }
+    .count{
+        font-size: 80px;
+    }
+    .section2{
+        height: 85vh;
+        .section2Heading{
+            font-size: 1.2rem;
+            height: 10%;
+        }
+        .section2Text{
+            font-size: 0.65rem;
+            height: 90%;
+        }
+    
+    }
+}
+@media screen and (max-width:400px){
+    .mainSection{
+    }
+    .count{
+        font-size: 60px;
+    }
+    .section2{
+        height: 85vh;
+        .section2Heading{
+            font-size: 1rem;
+            height: 10%;
+        }
+        .section2Text{
+            font-size: 0.5rem;
+            height: 90%;
+        }
+    
+    }
+}
+/* Hero call-to-action and scroll affordance. Added when the homepage gained
+   content below the fold — previously there was nothing to scroll to. */
+.heroCta {
+    color: var(--color-white);
+    text-decoration: none;
+    border-bottom: 2px solid var(--brand-accent);
+    padding-bottom: 2px;
+    transition: color var(--transition), border-color var(--transition);
+
+    &:hover {
+        color: var(--brand-accent);
+    }
+}
+
+.scrollCue {
+    position: absolute;
+    bottom: var(--space-5);
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-1);
+    font-family: var(--font-sans);
+    font-size: var(--step--1);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted-on-dark);
+    animation: scrollBob 2s ease-in-out infinite;
+}
+
+@keyframes scrollBob {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .scrollCue { animation: none; }
+}
+
+/* ------------------------------------------------------------------
+   Hero: technical treatment
+   Halftone screen, hairline frame, monospace specification row and
+   explicit actions. Mirrors the brochure's data-motif visual language.
+   ------------------------------------------------------------------ */
+
+.heroTexture {
+    position: absolute;
+    inset: 0;
+    background-image: var(--dot-grid);
+    background-size: var(--dot-grid-size);
+    /* Fade the screen out toward the centre so it frames rather than
+       competing with the wordmark. */
+    -webkit-mask-image: radial-gradient(ellipse at center, transparent 30%, black 85%);
+    mask-image: radial-gradient(ellipse at center, transparent 30%, black 85%);
+    opacity: 0.7;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.heroFrame {
+    position: absolute;
+    inset: var(--space-5);
+    border: 1px solid rgba(252, 246, 239, 0.14);
+    pointer-events: none;
+    z-index: 1;
+
+    /* Corner ticks, the way a technical drawing marks its crop. */
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        border: 2px solid var(--brand-accent);
+    }
+
+    &::before {
+        top: -1px;
+        left: -1px;
+        border-right: none;
+        border-bottom: none;
+    }
+
+    &::after {
+        bottom: -1px;
+        right: -1px;
+        border-left: none;
+        border-top: none;
+    }
+}
+
+.mainSection {
+    position: relative;
+    z-index: 2;
+}
+
+.metaRow {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-4);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    color: var(--text-on-dark);
+
+    li + li {
+        padding-left: var(--space-4);
+        border-left: 1px solid rgba(252, 246, 239, 0.28);
+    }
+}
+
+.heroActions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-4);
+}
+
+.heroPrimary,
+.heroSecondary {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: var(--space-3) var(--space-6);
+    /* Square corners read more technical than the soft radius used elsewhere. */
+    border-radius: 2px;
+    transition: background-color var(--transition), color var(--transition),
+        border-color var(--transition), transform var(--transition);
+
+    &:hover {
+        transform: translateY(-2px);
+    }
+}
+
+.heroPrimary {
+    background-color: var(--brand-accent);
+    /* Ink on periwinkle clears AA; cream does not. */
+    color: var(--text-on-accent);
+
+    &:hover {
+        background-color: var(--color-white);
+    }
+}
+
+.heroSecondary {
+    border: 1px solid rgba(252, 246, 239, 0.4);
+    color: var(--text-on-dark);
+
+    &:hover {
+        border-color: var(--brand-accent);
+        color: var(--brand-accent);
+    }
+}
+
+.heroClosed {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted-on-dark);
+    padding: var(--space-3) 0;
+}
+
+@media screen and (max-width: 600px) {
+    .heroFrame { inset: var(--space-3); }
+    .metaRow {
+        gap: var(--space-2);
+        li + li {
+            padding-left: var(--space-2);
+        }
+    }
+}
+

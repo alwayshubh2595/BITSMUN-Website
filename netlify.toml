@@ -1,0 +1,37 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  # Vite 4 needs a modern Node; Netlify's default has drifted older on some
+  # accounts, so it is pinned rather than left to chance.
+  NODE_VERSION = "18"
+
+# React Router handles routing in the browser. Without this, a direct visit or a
+# refresh on any path other than "/" asks Netlify for a file that does not exist
+# and returns 404. public/_redirects says the same thing; both are kept because
+# whichever survives a future restructure keeps deep links working.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Vite fingerprints everything under /assets, so those URLs are immutable and
+# safe to cache forever. index.html must never be cached, or visitors keep
+# loading an old bundle after a deploy.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
