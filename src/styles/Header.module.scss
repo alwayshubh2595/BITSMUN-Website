@@ -49,13 +49,36 @@
   color: var(--brand);
 }
 .hamburgerMenu {
-  overflow: hidden;
-    position: absolute;
-    height: 100vh;
-    right: 0;
+    overflow: hidden;
+    /* `absolute` anchored the panel to the header, so once the page was
+       scrolled the panel stayed behind at the top and the page showed through
+       below it. `fixed` pins it to the viewport instead. */
+    position: fixed;
     top: 0;
+    right: 0;
+    bottom: 0;
+    /* dvh follows the mobile address bar as it hides and shows; 100vh left a
+       strip of page visible along the bottom edge. */
+    height: 100vh;
+    height: 100dvh;
+    /* The panel had no stacking order at all, so hero layers (z-index 4) and
+       the loader painted straight over it. This must sit above everything. */
+    z-index: 1000;
     background-color: var(--surface-raised);
+    /* Opaque even if --surface-raised is ever given transparency, and it blocks
+       anything with a filter/blend from bleeding through. */
+    isolation: isolate;
     transition: 0.7s ease;
+
+    /* Every item in here was hardcoded to black. In dark mode the panel is
+       #161a26, so the whole menu was black text on a near-black ground —
+       effectively invisible. This follows the theme instead. */
+    color: var(--text-on-light);
+    .link,
+    .link div,
+    a {
+      color: var(--text-on-light);
+    }
     .hamburgerHeader{
         height: 20%;
         width: 100%;

@@ -36,6 +36,19 @@ const Header = (props) => {
   // The hero sits on a photo, so its header is always light-on-dark.
   const headerLogo = props.color === "white" || !isLight ? logow : logob;
 
+  // With the panel fixed, the page underneath still scrolls on touch — you can
+  // flick the menu and watch the site slide about behind it. Freeze the body
+  // while it is open, and always restore on unmount so navigating away from a
+  // page with the menu open cannot leave the site permanently unscrollable.
+  useEffect(() => {
+    if (!hamburgerMenu) return undefined;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [hamburgerMenu]);
+
   const changeHamburgerMenu = () => {
     setHamburgerMenu(!hamburgerMenu);
     if (hamburgerMenu) {
@@ -201,6 +214,12 @@ const Header = (props) => {
         <div
           className={styles.hamburgerMenu}
           style={{ width: hamburgerMenu ? "100vw" : "0vw" }}
+          // Tapping a link routed to the new page but left the panel open on
+          // top of it, so the menu looked stuck. Close on any link tap, while
+          // letting taps on the dropdown toggles fall through.
+          onClick={(event) => {
+            if (event.target.closest("a")) setHamburgerMenu(false);
+          }}
         >
           <div className={styles.hamburgerHeader}>
             <div className={styles.hamburgerHeaderLogo} draggable="false">
