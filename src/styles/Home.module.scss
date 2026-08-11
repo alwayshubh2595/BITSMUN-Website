@@ -1,6 +1,12 @@
 .homeContainer{
-    width: 100vw;
+    width: 100%;
+    /* On phones 100vh is the viewport with the address bar HIDDEN, so a full
+       height hero is taller than what you can actually see and its bottom —
+       the buttons and the scroll cue — sits under the browser chrome. svh is
+       the small viewport height: what is visible with the bar showing. The vh
+       line is the fallback for browsers without svh. */
     height: 100vh;
+    height: 100svh;
     position: relative;
     background-color: var(--surface-dark);
 }

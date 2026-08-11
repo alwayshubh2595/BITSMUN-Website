@@ -190,53 +190,32 @@
     }
   }
 }
+/* Switch to the hamburger at 900px, not 600px.
+   Six nav items (Home, About Us, Committees, Info/Docs, Registrations, Contact
+   Us) cannot fit 65% of a narrow viewport. Between 601 and 900px they were
+   being squeezed to 0.6rem and overlapping the hero — which covers large
+   phones, EVERY phone in landscape, and small tablets. */
 @media screen and (max-width: 900px) {
   .Header {
-    height: 15vh;
+    /* A viewport-relative header height collapses in landscape, where 15vh is
+       barely 60px, and the logo goes with it. Fixed bounds instead. */
+    height: auto;
+    min-height: 68px;
+    padding-block: 0.5rem;
+
     .logo {
-      width: 30%;
+      width: auto;
       img {
-        height: 100%;
-      }
-    }
-    .navbar {
-      width: 65%;
-      font-size: 0.8rem;
-    }
-  }
-}
-@media screen and (max-width: 700px) {
-  .Header {
-    height: 15vh;
-    .logo {
-      width: 30%;
-      img {
-        height: 100%;
-      }
-    }
-    .navbar {
-      width: 65%;
-      font-size: 0.6rem;
-    }
-  }
-}
-@media screen and (max-width: 600px) {
-  .Header {
-    height: 15vh;
-    .logo {
-      width: 30%;
-      img {
-        height: 100%;
+        height: 48px;
       }
     }
     .navbar {
       display: none;
     }
-    .hamburgerMenu{
+    .hamburgerMenu {
       display: flex;
       flex-direction: column;
     }
-
     .hamburgerIcon {
       display: block;
     }

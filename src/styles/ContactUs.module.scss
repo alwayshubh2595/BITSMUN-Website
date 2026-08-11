@@ -1,15 +1,23 @@
 .mainpage{
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
+    width: 100%;
+    /* Was `height: 100vh` with `overflow: hidden`. On a phone the map and the
+       contact details stack taller than the viewport, and the fixed height then
+       CLIPPED everything below the fold with no way to scroll to it — the page
+       lost its lower half entirely. min-height keeps the full-screen look on
+       desktop while letting the page grow when it needs to. */
+    min-height: 100vh;
+    min-height: 100svh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     .contactUs{
         display: flex;
+        /* Side by side on desktop, stacked once there is no room. Without the
+           wrap, the map and the text were squeezed to unusable widths. */
+        flex-wrap: wrap;
         width: 100%;
-        height: 95%;
+        min-height: 95%;
         justify-content: space-around;
         align-items: center;
         .details{
@@ -167,15 +175,21 @@
     }
 }
 @media screen and (max-width:600px){
+    /* Stack here rather than at 500px. A 40/60 split on a 600px-wide phone left
+       the map too narrow to read and the address wrapping every second word. */
+    .contactUs{
+        flex-direction: column;
+    }
     .map{
-        width: 40%;
+        width: 90%;
+        min-height: 300px;
         iframe{
-            height: 70%;
-            width: 90%;
+            height: 300px;
+            width: 100%;
         }
     }
     .details{
-        width: 60%;
+        width: 90%;
     }
     .detailsSection1{
         font-size: 1.1rem;
@@ -196,9 +210,9 @@
     .contactUs{
         flex-direction: column;
     }
-    .mainpage{
-        height: 130vh;
-    }
+    /* Deliberately no height here. It used to be a hardcoded 130vh, which is a
+       guess at how tall the content happens to be — wrong on any phone whose
+       text wraps differently, and it fought the min-height above. */
     .map{
         width: 80%;
         height: 60%;
