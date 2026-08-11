@@ -8,6 +8,12 @@ import sanityClient from "../client.js";
 import { Grid } from 'react-loader-spinner'
 import Footer from "../components/Footer.jsx";
 
+// Secretariat contacts, named so a caller knows who they are reaching.
+const CONTACTS = [
+  { name: "Anshuman Pathak", phone: "+91 99581 95460" },
+  { name: "Sharda Sinha", phone: "+91 70489 78865" },
+];
+
 const ContactUs = () => {
   const [contactDetails, setContactDetails] = useState([]);
   const [isFetched, setFetched] = useState(false);
@@ -82,10 +88,17 @@ const ContactUs = () => {
                     Pilani Road <br />
                     Rajasthan-333031
                   </div>
-                  <div className={styles.phone}>
-                    <i class="fa-solid fa-phone"></i>
-                    <a href={`tel:${contactDetail.phone.split(" ").join("")}`}>{contactDetail.phone}</a>
-                  </div>
+                  {/* Two named contacts. The Sanity document only carries a
+                      single unnamed `phone`, so these are listed here where a
+                      reader can tell who they are actually calling. */}
+                  {CONTACTS.map((contact) => (
+                    <div className={styles.phone} key={contact.phone}>
+                      <i class="fa-solid fa-phone"></i>
+                      <a href={`tel:${contact.phone.split(" ").join("")}`}>
+                        {contact.name} &mdash; {contact.phone}
+                      </a>
+                    </div>
+                  ))}
                   <div className={styles.mail}>
                     <i class="fa-solid fa-envelope"></i>
                     <a

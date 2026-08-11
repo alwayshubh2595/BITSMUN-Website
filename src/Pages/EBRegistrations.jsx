@@ -10,7 +10,7 @@ import Footer from "../components/Footer";
 const EBRegistrations = () => {
   let context = useContext(EntryContext);
   useEffect(() => {
-    document.title = "EB Registrations | BITSMUN Pilani 2026";
+    document.title = "EB Applications | BITSMUN Pilani 2026";
     context.setEntry();
   }, []);
   const [data, setData] = useState(null);
@@ -37,7 +37,7 @@ const EBRegistrations = () => {
           </div>)}
           <div>
           {data && !isOpenFlag(data?.[0]?.EBregistrationType) && (
-            <div className={styles.closed}> EB Registrations are Closed!</div>
+            <div className={styles.closed}> EB Applications are Closed!</div>
           )}
           </div>
         </div>

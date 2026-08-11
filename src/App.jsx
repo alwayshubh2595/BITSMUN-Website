@@ -1,5 +1,5 @@
 import Header from './components/Header'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import Home from './Pages/Home'
 import AboutUs from './Pages/AboutUs'
 import Committees from './Pages/Committees'
@@ -24,7 +24,11 @@ function App() {
         <Route path='/AboutUs' Component={AboutUs} />
         <Route path='/Committees' Component={Committees} />
         <Route path='/Registrations' Component={Registrations} />
-        <Route path='/EBRegistrations' Component={EBRegistrations} />
+        <Route path='/EBApplications' Component={EBRegistrations} />
+        {/* The page was renamed from Registrations to Applications. Anyone
+            holding the old link — a poster, a WhatsApp forward, a bookmark —
+            still lands in the right place instead of the 404 page. */}
+        <Route path='/EBRegistrations' element={<Navigate to='/EBApplications' replace />} />
         <Route path='/ContactUs' Component={ContactUs} />
         <Route path='/Developer' Component={Developer} />
         <Route path='/BG' Component={BG} />

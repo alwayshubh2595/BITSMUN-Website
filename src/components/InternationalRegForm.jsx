@@ -4,11 +4,15 @@ import { useFormik } from "formik";
 import schema from "./schema/intregschema";
 import { useState, useEffect } from "react";
 import sanityClient from "../client.js";
-import qr from "../assets/qr.jpg";
+import qr from "../assets/qr-2026.jpeg";
 import currencySymbolMap from 'currency-symbol-map';
 import currencyCodes from 'currency-codes';
 import { submitToScript } from "../utils/submitForm.js";
 import { prepareUpload } from "../utils/fileUpload.js";
+
+// Same committee/portfolio matrix as the domestic delegate form.
+const PORTFOLIO_MATRIX_URL =
+  "https://docs.google.com/spreadsheets/d/15MjHsOO1ZQ1Pndeo1Jrg4wDDtAUmyIEs8QIajNYW1wQ/edit?usp=sharing";
 
 const DelRegForm = () => {
   const [committees, setCommittees] = useState([]);
@@ -149,7 +153,6 @@ const DelRegForm = () => {
       name: "",
       email: "",
       phone: "",
-      age: "",
       institute: "",
       countryName:"",
       mode: "",
@@ -158,7 +161,6 @@ const DelRegForm = () => {
       experience: "",
       portfolio1: "",
       portfolio2: "",
-      portfolio3: "",
       coupon: "",
       fileContent: "",
       fileName: "",
@@ -266,6 +268,11 @@ const DelRegForm = () => {
       >
         {/* Routes the submission to the right tab in the sheet. */}
         <input type="hidden" name="formType" value="international" readOnly />
+        {/* As in the delegate form: the payable amount was displayed but never
+            submitted, leaving no record of what was charged. Client-computed,
+            so treat it as a claim and check it against the screenshot. */}
+        <input type="hidden" name="amount" value={amount} readOnly />
+        <input type="hidden" name="listAmount" value={originalAmount} readOnly />
         <input
           type="hidden"
           value={values.fileContent}
@@ -387,29 +394,6 @@ const DelRegForm = () => {
           </div>
           {errors.phone && touched.phone ? (
             <p className={styles.errorPara}>{errors.phone}</p>
-          ) : (
-            ""
-          )}
-        </div>
-        <div className={styles.inputField}>
-          <label htmlFor="age">Age: </label>
-          <input
-            type="number"
-            name="age"
-            id="age"
-            value={values.age}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            autoComplete="off"
-            placeholder="Enter your Age"
-            className={
-              errors.age && touched.age
-                ? `${styles.error} ${styles.age}`
-                : `${styles.age}`
-            }
-          />
-          {errors.age && touched.age ? (
-            <p className={styles.errorPara}>{errors.age}</p>
           ) : (
             ""
           )}
@@ -549,8 +533,8 @@ const DelRegForm = () => {
         </div>
         <div className={styles.inputField}>
           <label htmlFor="portfolio1">
-            First Choice of Portfolio: &nbsp;
-            <a style={{color:"black"}} target="_blank" href="https://docs.google.com/spreadsheets/d/1MUcmJOdLpoOBCskiigt8kj5UPFgodRhmkyaZExnF5zE/edit?gid=1870681100#gid=1870681100">(Link to Matrix)</a>
+            Choices of Portfolio for Preference 1: &nbsp;
+            <a className={styles.matrixLink} target="_blank" rel="noreferrer" href={PORTFOLIO_MATRIX_URL}>(Link to Matrix)</a>
           </label>
           <input
             type="string"
@@ -575,8 +559,8 @@ const DelRegForm = () => {
         </div>
         <div className={styles.inputField}>
           <label htmlFor="portfolio2">
-            Second Choice of Portfolio: &nbsp;
-            <a style={{color:"black"}} target="_blank" href="https://docs.google.com/spreadsheets/d/1MUcmJOdLpoOBCskiigt8kj5UPFgodRhmkyaZExnF5zE/edit?gid=1870681100#gid=1870681100">(Link to Matrix)</a>
+            Choices of Portfolio for Preference 2: &nbsp;
+            <a className={styles.matrixLink} target="_blank" rel="noreferrer" href={PORTFOLIO_MATRIX_URL}>(Link to Matrix)</a>
           </label>
           <input
             type="string"
@@ -595,32 +579,6 @@ const DelRegForm = () => {
           />
           {errors.portfolio2 && touched.portfolio2 ? (
             <p className={styles.errorPara}>{errors.portfolio2}</p>
-          ) : (
-            ""
-          )}
-        </div>
-        <div className={styles.inputField}>
-          <label htmlFor="portfolio3">
-            Third Choice of Portfolio: &nbsp;
-            <a style={{color:"black"}} target="_blank" href="https://docs.google.com/spreadsheets/d/1MUcmJOdLpoOBCskiigt8kj5UPFgodRhmkyaZExnF5zE/edit?gid=1870681100#gid=1870681100">(Link to Matrix)</a>
-          </label>
-          <input
-            type="string"
-            name="portfolio3"
-            id="portfolio3"
-            value={values.portfolio3}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            autoComplete="off"
-            placeholder="Enter your Choice of Portfolio"
-            className={
-              errors.portfolio3 && touched.portfolio3
-                ? `${styles.error} ${styles.portfolio1}`
-                : `${styles.portfolio1}`
-            }
-          />
-          {errors.portfolio3 && touched.portfolio3 ? (
-            <p className={styles.errorPara}>{errors.portfolio3}</p>
           ) : (
             ""
           )}

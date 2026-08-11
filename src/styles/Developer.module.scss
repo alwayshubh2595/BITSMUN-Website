@@ -17,11 +17,10 @@
   width: min(1160px, 100% - 2 * var(--space-5));
   margin-inline: auto;
   display: grid;
-  /* A single developer should not stretch to the full width of the page. */
-  /* Bounded tracks rather than 1fr, so a part-full row centres
-           instead of stretching or hugging the left edge. */
-        grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 240px));
-        justify-content: center;
+  /* auto-FIT, not auto-fill: auto-fill keeps the empty tracks it created, so
+     they still take up space and the single card was pushed left of centre.
+     auto-fit collapses them to zero, letting justify-content centre the row. */
+  grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 240px));
   justify-content: center;
   gap: var(--space-5);
   align-items: stretch;

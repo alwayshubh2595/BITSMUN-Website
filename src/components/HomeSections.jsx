@@ -211,7 +211,7 @@ const HomeSections = ({ registration }) => {
               </Link>
             )}
             {isOpenFlag(registration?.EBregistrationType) && (
-              <Link className={styles.buttonGhost} to="/EBRegistrations">
+              <Link className={styles.buttonGhost} to="/EBApplications">
                 Apply to the Executive Board
               </Link>
             )}

@@ -6,6 +6,9 @@ import React, { useEffect, useRef, useState } from "react";
 import logow from "../assets/sod-bitsmun-2026-logo.png";
 import logob from "../assets/sod-bitsmun-2026-logo-dark.png";
 import reachPilani from "../assets/How_To_Reach_Pilani.pdf"
+// Bundled rather than linked to Drive: the 2025 link pointed at last year's
+// file, and a Drive link silently breaks if its sharing setting changes.
+import brochure from "../assets/SODxBITSMUN-2026-Brochure.pdf"
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import sanityClient from "../client.js";
@@ -160,9 +163,9 @@ const Header = (props) => {
                   {isOpenFlag(data?.[0]?.EBregistrationType) && (
                     <Link
 
-                      to="/EBRegistrations"
+                      to="/EBApplications"
                     >
-                      EB Registrations
+                      EB Applications
                     </Link>
                   )}
                   {isOpenFlag(data?.[0]?.registrationType) && (
@@ -192,7 +195,7 @@ const Header = (props) => {
             </div>
             {documentsMenu && (
               <div className={styles.dropdownContent}>
-                <a target="_blank" href="https://drive.google.com/file/d/1J-L_hB1AWgoTntW7XeOF_t5q5f5v4H6i/view?usp=sharing">Brochure</a>
+                <a target="_blank" rel="noreferrer" href={`${brochure}#toolbar=0`}>Brochure</a>
                 <Link to="/BG">Background Guides</Link>
                 <Link to="/CampusAmbassador">Campus Ambassador</Link>
                 <Link to="/Gallery">Gallery</Link>
@@ -237,18 +240,16 @@ const Header = (props) => {
             </div>
           </div>
           <div className={styles.hamburgerNavbar}>
-            <Link style={{ color: "black" }} className={styles.link} to="/">
+            <Link className={styles.link} to="/">
               <div>Home</div>
             </Link>
             <Link
-              style={{ color: "black" }}
               className={styles.link}
               to="/AboutUs"
             >
               <div>About Us</div>
             </Link>
             <Link
-              style={{ color: "black" }}
               className={styles.link}
               to="/Committees"
             >
@@ -257,7 +258,7 @@ const Header = (props) => {
             
             {isRegistrationOpen && (
               <div className={styles.dropdown} onClick={toggleRegistrationsMenu} onMouseLeave={closeRegistrationsMenu}>
-                <div className={styles.link} style={{ color: "black" }}>
+                <div className={styles.link}>
                   Registrations <i className={`fa fa-caret-down ${registrationsMenu ? styles.rotate : ''}`}></i>
                 </div>
                 {registrationsMenu && (
@@ -265,9 +266,9 @@ const Header = (props) => {
                     {isOpenFlag(data?.[0]?.EBregistrationType) && (
                       <Link
 
-                        to="/EBRegistrations"
+                        to="/EBApplications"
                       >
-                        EB Registrations
+                        EB Applications
                       </Link>
                     )}
                     {isOpenFlag(data?.[0]?.registrationType) && (
@@ -289,12 +290,12 @@ const Header = (props) => {
               </div>
             )}
             <div className={styles.dropdown} onClick={toggleDocumentsMenu} onMouseLeave={closeDocumentsMenu}>
-              <div className={styles.link} style={{ color: "black" }}>
+              <div className={styles.link}>
               Info/Docs <i className={`fa fa-caret-down ${documentsMenu ? styles.rotate : ''}`}></i>
               </div>
               {documentsMenu && (
                 <div className={styles.dropdownContent}>
-                  <a target="_blank" href="https://drive.google.com/file/d/1J-L_hB1AWgoTntW7XeOF_t5q5f5v4H6i/view?usp=sharing">Brochure</a>
+                  <a target="_blank" rel="noreferrer" href={`${brochure}#toolbar=0`}>Brochure</a>
                   <Link to="/BG">Background Guides</Link>
                   <Link to="/CampusAmbassador">Campus Ambassador</Link>
                   <Link to="/Gallery">Gallery</Link>
@@ -305,7 +306,6 @@ const Header = (props) => {
             </div>
 
             <Link
-              style={{ color: "black" }}
               className={styles.link}
               to="/ContactUs"
             >

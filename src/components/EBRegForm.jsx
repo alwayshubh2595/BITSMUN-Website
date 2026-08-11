@@ -59,7 +59,6 @@ const EBRegForm = () => {
       name: "",
       email: "",
       phone: "",
-      age: "",
       committee1: "",
       committee2: "",
       experience: "",
@@ -181,29 +180,6 @@ const EBRegForm = () => {
           />
           {errors.phone && touched.phone ? (
             <p className={styles.errorPara}>{errors.phone}</p>
-          ) : (
-            ""
-          )}
-        </div>
-        <div className={styles.inputField}>
-          <label htmlFor="age">Age: </label>
-          <input
-            type="number"
-            name="age"
-            id="age"
-            value={values.age}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            autoComplete="off"
-            placeholder="Enter your Age"
-            className={
-              errors.age && touched.age
-                ? `${styles.error} ${styles.age}`
-                : `${styles.age}`
-            }
-          />
-          {errors.age && touched.age ? (
-            <p className={styles.errorPara}>{errors.age}</p>
           ) : (
             ""
           )}

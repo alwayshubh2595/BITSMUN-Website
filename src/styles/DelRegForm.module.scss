@@ -415,3 +415,16 @@
         color: var(--text-on-light);
     }
 }
+
+/* Matrix link inside a field label. Was inline color:black, which disappeared
+   against the dark form surface. */
+.matrixLink {
+  color: var(--brand-accent);
+  text-decoration: underline;
+  font-weight: 600;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--text-on-light);
+  }
+}

@@ -26,10 +26,16 @@ const CommitteeCard = (props) => {
         {props.fullname && <p className={styles.fullname}>{props.fullname}</p>}
 
         <dl className={styles.meta}>
-          <div>
-            <dt>{isPress ? "Roles" : "Agenda"}</dt>
-            <dd>{props.agenda ? props.agenda : "To be announced"}</dd>
-          </div>
+          {/* A crisis committee is defined by its freeze date, not an agenda —
+              CCC US NSC will never have one, so showing "Agenda: To be
+              announced" there promises something that is not coming. Only fall
+              back to "To be announced" for committees that should have one. */}
+          {(props.agenda || !props.freezeDate) && (
+            <div>
+              <dt>{isPress ? "Roles" : "Agenda"}</dt>
+              <dd>{props.agenda ? props.agenda : "To be announced"}</dd>
+            </div>
+          )}
 
           {props.freezeDate && (
             <div>

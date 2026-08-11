@@ -3,11 +3,10 @@ import * as yup from 'yup';
 const schema = yup.object().shape({
     name: yup.string().required("Name is required"),
     email: yup.string().email("Enter a valid email").required("Email is required"),
-    age: yup.number().required("Age is required").positive("Enter a valid age").integer("Enter a valid age").min(12, "Age should be greater than 12"),
     phone: yup.string().required("Phone number is required").test(
         'is-valid-phone',
         function (value) {
-            if (!value.startsWith('+91')) {
+            if (!value || !value.startsWith('+91')) {
                 return this.createError({ message: 'Phone number must start with +91' });
             }
             if (value.length !== 13) {
@@ -21,7 +20,12 @@ const schema = yup.object().shape({
     committee1: yup.string().required("Choose a committee"),
     committee2: yup.string().required("Choose a committee").notOneOf([yup.ref('committee1')], 'Choose a different committee'),
     experience: yup.string().required("Enter your experience"),
-    portfolio: yup.string().required("Enter your choices of Portfolio"),
+    // Split from a single `portfolio` field into two ranked preferences.
+    portfolio1: yup.string().required("Enter your first choice of Portfolio"),
+    portfolio2: yup.string().required("Enter your second choice of Portfolio"),
+    // Was validated only by an ad-hoc check in onSubmit, which ran after the
+    // rest of the form had already passed.
+    fileContent: yup.string().required("Upload your payment screenshot"),
 });
 
 export default schema;

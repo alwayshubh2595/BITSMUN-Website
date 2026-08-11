@@ -4,9 +4,17 @@ import { useFormik } from "formik";
 import schema from "./schema/schema";
 import { useState, useEffect } from "react";
 import sanityClient from "../client.js";
-import qr from "../assets/qr.jpg";
+import qr from "../assets/qr-2026.jpeg";
 import { submitToScript } from "../utils/submitForm.js";
 import { prepareUpload } from "../utils/fileUpload.js";
+
+// Registration fees, in one place so the displayed amount, the hidden field
+// posted to the sheet, and any future price change cannot drift apart.
+const MODE_FEES = { Offline: 2000, Online: 1000 };
+
+// Committee/portfolio matrix, shown next to both portfolio preference fields.
+const PORTFOLIO_MATRIX_URL =
+  "https://docs.google.com/spreadsheets/d/15MjHsOO1ZQ1Pndeo1Jrg4wDDtAUmyIEs8QIajNYW1wQ/edit?usp=sharing";
 
 const DelRegForm = () => {
   const [committees, setCommittees] = useState([]);
@@ -84,13 +92,13 @@ const DelRegForm = () => {
       name: "",
       email: "",
       phone: "+91",
-      age: "",
       institute: "",
       mode: "",
       committee1: "",
       committee2: "",
       experience: "",
-      portfolio: "",
+      portfolio1: "",
+      portfolio2: "",
       coupon: "",
       fileContent: "",
       fileName: "",
@@ -121,7 +129,7 @@ const DelRegForm = () => {
   const handleModeChange = (event) => {
     const mode = event.target.value;
     setSelectedMode(mode);
-    const newAmount = mode === "Online" ? 1500 : mode === "Offline" ? 3500 : "N/A";
+    const newAmount = MODE_FEES[mode] ?? "N/A";
     setAmount(newAmount);
     setOriginalAmount(newAmount);
     handleChange(event);
@@ -170,6 +178,14 @@ const DelRegForm = () => {
       >
         {/* Routes the submission to the right tab in the sheet. */}
         <input type="hidden" name="formType" value="delegate" readOnly />
+        {/* The payable amount was shown to the delegate but never submitted, so
+            the sheet had no record of what anyone was asked to pay. Both the
+            list price and the discounted total are sent, so a coupon can be
+            reconciled against the payment screenshot. These are client-computed
+            and therefore a CLAIM, not an authority — verify against the
+            screenshot before confirming a registration. */}
+        <input type="hidden" name="amount" value={amount} readOnly />
+        <input type="hidden" name="listAmount" value={originalAmount} readOnly />
         <input
           type="hidden"
           value={values.fileContent}
@@ -249,29 +265,6 @@ const DelRegForm = () => {
           />
           {errors.phone && touched.phone ? (
             <p className={styles.errorPara}>{errors.phone}</p>
-          ) : (
-            ""
-          )}
-        </div>
-        <div className={styles.inputField}>
-          <label htmlFor="age">Age: </label>
-          <input
-            type="number"
-            name="age"
-            id="age"
-            value={values.age}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            autoComplete="off"
-            placeholder="Enter your Age"
-            className={
-              errors.age && touched.age
-                ? `${styles.error} ${styles.age}`
-                : `${styles.age}`
-            }
-          />
-          {errors.age && touched.age ? (
-            <p className={styles.errorPara}>{errors.age}</p>
           ) : (
             ""
           )}
@@ -411,27 +404,67 @@ const DelRegForm = () => {
           )}
         </div>
         <div className={styles.inputField}>
-          <label htmlFor="portfolio">
-            Choices of Portfolio: &nbsp;
-            <a style={{color:"black"}} target="_blank" href="https://docs.google.com/spreadsheets/d/1MUcmJOdLpoOBCskiigt8kj5UPFgodRhmkyaZExnF5zE/edit?gid=1870681100#gid=1870681100">(Link to Matrix)</a>
+          <label htmlFor="portfolio1">
+            Choices of Portfolio for Preference 1: &nbsp;
+            <a
+              className={styles.matrixLink}
+              target="_blank"
+              rel="noreferrer"
+              href={PORTFOLIO_MATRIX_URL}
+            >
+              (Link to Matrix)
+            </a>
           </label>
           <input
-            type="string"
-            name="portfolio"
-            id="portfolio"
-            value={values.portfolio}
+            type="text"
+            name="portfolio1"
+            id="portfolio1"
+            value={values.portfolio1}
             onChange={handleChange}
             onBlur={handleBlur}
             autoComplete="off"
-            placeholder="Enter your Choices of Portfolio"
+            placeholder="Enter your Choices of Portfolio for Preference 1"
             className={
-              errors.portfolio && touched.portfolio
+              errors.portfolio1 && touched.portfolio1
                 ? `${styles.error} ${styles.portfolio}`
                 : `${styles.portfolio}`
             }
           />
-          {errors.portfolio && touched.portfolio ? (
-            <p className={styles.errorPara}>{errors.portfolio}</p>
+          {errors.portfolio1 && touched.portfolio1 ? (
+            <p className={styles.errorPara}>{errors.portfolio1}</p>
+          ) : (
+            ""
+          )}
+        </div>
+        <div className={styles.inputField}>
+          <label htmlFor="portfolio2">
+            Choices of Portfolio for Preference 2: &nbsp;
+            <a
+              className={styles.matrixLink}
+              target="_blank"
+              rel="noreferrer"
+              href={PORTFOLIO_MATRIX_URL}
+            >
+              (Link to Matrix)
+            </a>
+          </label>
+          <input
+            type="text"
+            name="portfolio2"
+            id="portfolio2"
+            value={values.portfolio2}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            autoComplete="off"
+            placeholder="Enter your Choices of Portfolio for Preference 2"
+            className={
+              errors.portfolio2 && touched.portfolio2
+                ? `${styles.error} ${styles.portfolio}`
+                : `${styles.portfolio}`
+            }
+          />
+          {errors.portfolio2 && touched.portfolio2 ? (
+            <p className={styles.errorPara}>{errors.portfolio2}</p>
           ) : (
             ""
           )}

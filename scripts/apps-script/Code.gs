@@ -39,19 +39,20 @@ var ALLOWED_UPLOAD_TYPES = {
 var SCHEMAS = {
   delegate: {
     sheet: 'Delegates',
-    fields: ['name', 'email', 'phone', 'age', 'institute', 'mode',
-             'committee1', 'committee2', 'experience', 'portfolio', 'coupon', 'amount']
+    fields: ['name', 'email', 'phone', 'institute', 'mode',
+             'committee1', 'committee2', 'experience',
+             'portfolio1', 'portfolio2', 'coupon', 'listAmount', 'amount']
   },
   eb: {
     sheet: 'Executive Board',
-    fields: ['name', 'email', 'phone', 'age', 'committee1', 'committee2',
+    fields: ['name', 'email', 'phone', 'committee1', 'committee2',
              'experience', 'ebexperience']
   },
   international: {
     sheet: 'International Delegates',
-    fields: ['name', 'email', 'countryName', 'phone', 'age', 'institute', 'mode',
+    fields: ['name', 'email', 'countryName', 'phone', 'institute', 'mode',
              'committee1', 'committee2', 'experience',
-             'portfolio1', 'portfolio2', 'portfolio3', 'coupon', 'amount']
+             'portfolio1', 'portfolio2', 'coupon', 'listAmount', 'amount']
   }
 };
 
