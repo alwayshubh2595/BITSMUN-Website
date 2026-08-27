@@ -226,7 +226,7 @@ const Home = () => {
               {/* Technical meta row: monospace, hairline-separated, uppercase.
                   Reads as specification rather than decoration. */}
               <ul className={styles.metaRow}>
-                <li>04&ndash;06 SEP 2026</li>
+                <li>DATES TBA</li>
                 <li>BITS PILANI</li>
                 <li>08 COMMITTEES</li>
               </ul>

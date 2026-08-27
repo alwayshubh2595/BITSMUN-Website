@@ -10,7 +10,7 @@ import styles from "../styles/HomeSections.module.scss";
 // scroll content, so a visitor learned nothing without navigating away.
 
 const stats = [
-  { value: "4-6 Sept", label: "2026" },
+  { value: "TBA", label: "Dates, 2026" },
   { value: "8", label: "Committees" },
   { value: "₹1.5L+", label: "Prize Pool" },
   { value: "BITS", label: "Pilani Campus" },
